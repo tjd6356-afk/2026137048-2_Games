@@ -74,9 +74,9 @@ public class PlayerCameraSmoothed : MonoBehaviour
         if (Keyboard.current.aKey.isPressed) moveDirection -= transform.right; // transform.right는 항상 수평이므로 그대로 사용
         if (Keyboard.current.dKey.isPressed) moveDirection += transform.right;
 
-        // [요청] 키 변경: Space (상승), Shift (하강)
+        // [요청] 키 변경: Space (상승), Ctrl (하강)
         if (Keyboard.current.spaceKey.isPressed) moveDirection += Vector3.up; // 항상 수직 위
-        if (Keyboard.current.shiftKey.isPressed) moveDirection -= Vector3.up; // 항상 수직 아래
+        if (Keyboard.current.ctrlKey.isPressed) moveDirection -= Vector3.up; // 항상 수직 아래
 
         // 대각선 이동 속도 일정하게 정규화
         if (moveDirection != Vector3.zero)
