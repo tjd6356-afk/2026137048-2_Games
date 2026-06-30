@@ -18,7 +18,7 @@ public class PlayerCameraSmoothed : MonoBehaviour
     void Start()
     {
         // 마우스 고정 및 숨기기
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
@@ -39,6 +39,8 @@ public class PlayerCameraSmoothed : MonoBehaviour
     // [기능 1] 부드러운 마우스 회전 로직
     void RotateCameraSmoothed()
     {
+        if (SelectionManager.IsDragging) return;
+
         if (Mouse.current == null) return;
 
         // 마우스의 움직임(Delta)을 읽어옵니다.
