@@ -14,6 +14,31 @@ public class WorkingClickable : MonoBehaviour
     [Tooltip("선택된 직원의 이동 명령을 위해 필요한 SelectionManager입니다. 비워두면 씬에서 자동으로 찾습니다.")]
     public SelectionManager selectionManager;
 
+    public Transform redPoint;
+    public Transform whitePoint;
+    public Transform blackPoint;
+    public Transform palePoint;
+
+    public Transform GetPoint(WorkType type)
+    {
+        switch (type)
+        {
+            case WorkType.Red:
+                return redPoint;
+
+            case WorkType.White:
+                return whitePoint;
+
+            case WorkType.Black:
+                return blackPoint;
+
+            case WorkType.Pale:
+                return palePoint;
+        }
+
+        return transform;
+    }
+
     private Camera mainCamera;
 
     void Start()

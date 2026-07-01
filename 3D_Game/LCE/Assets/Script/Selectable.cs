@@ -70,4 +70,20 @@ public class Selectable : MonoBehaviour
             agent.SetDestination(destination);
         }
     }
+
+    public WorkType CurrentWorkType { get; private set; }
+
+    public void MoveToWorkplace(
+        Vector3 destination,
+        Transform workplace,
+        WorkType workType)
+    {
+        CurrentWorkplace = workplace;
+        CurrentWorkType = workType;
+
+        if (agent != null && agent.isOnNavMesh)
+        {
+            agent.SetDestination(destination);
+        }
+    }
 }

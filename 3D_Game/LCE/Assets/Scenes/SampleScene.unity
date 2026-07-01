@@ -320,7 +320,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1429403283}
         m_TargetAssemblyTypeName: WorkingSelectPanelUI, Assembly-CSharp
-        m_MethodName: OnAnyWorkButtonClicked
+        m_MethodName: AssignPale
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -864,7 +864,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1429403283}
         m_TargetAssemblyTypeName: WorkingSelectPanelUI, Assembly-CSharp
-        m_MethodName: OnAnyWorkButtonClicked
+        m_MethodName: AssignWhite
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1114,7 +1114,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 2583ae6e8ddec664291411eabf07419b, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: fefec21df024c3c428628ed1bdd5c962, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &1251217957 stripped
 Transform:
@@ -1233,6 +1233,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2365059662746728343, guid: 7f6a6f151b232fc4ea93b36290eebb8f, type: 3}
+      propertyPath: redPoint
+      value: 
+      objectReference: {fileID: 1609256688}
+    - target: {fileID: 2365059662746728343, guid: 7f6a6f151b232fc4ea93b36290eebb8f, type: 3}
+      propertyPath: palePoint
+      value: 
+      objectReference: {fileID: 73186241}
+    - target: {fileID: 2365059662746728343, guid: 7f6a6f151b232fc4ea93b36290eebb8f, type: 3}
+      propertyPath: blackPoint
+      value: 
+      objectReference: {fileID: 2115810808}
+    - target: {fileID: 2365059662746728343, guid: 7f6a6f151b232fc4ea93b36290eebb8f, type: 3}
+      propertyPath: whitePoint
+      value: 
+      objectReference: {fileID: 535340565}
     - target: {fileID: 2365059662746728343, guid: 7f6a6f151b232fc4ea93b36290eebb8f, type: 3}
       propertyPath: targetPanel
       value: 
@@ -1504,7 +1520,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1429403283}
         m_TargetAssemblyTypeName: WorkingSelectPanelUI, Assembly-CSharp
-        m_MethodName: OnAnyWorkButtonClicked
+        m_MethodName: AssignRed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1711,7 +1727,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1429403283}
         m_TargetAssemblyTypeName: WorkingSelectPanelUI, Assembly-CSharp
-        m_MethodName: OnAnyWorkButtonClicked
+        m_MethodName: AssignBlack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1832,6 +1848,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2365059662746728343, guid: 7f6a6f151b232fc4ea93b36290eebb8f, type: 3}
+      propertyPath: redPoint
+      value: 
+      objectReference: {fileID: 1609256688}
+    - target: {fileID: 2365059662746728343, guid: 7f6a6f151b232fc4ea93b36290eebb8f, type: 3}
+      propertyPath: palePoint
+      value: 
+      objectReference: {fileID: 73186241}
+    - target: {fileID: 2365059662746728343, guid: 7f6a6f151b232fc4ea93b36290eebb8f, type: 3}
+      propertyPath: blackPoint
+      value: 
+      objectReference: {fileID: 2115810808}
+    - target: {fileID: 2365059662746728343, guid: 7f6a6f151b232fc4ea93b36290eebb8f, type: 3}
+      propertyPath: whitePoint
+      value: 
+      objectReference: {fileID: 535340565}
     - target: {fileID: 2365059662746728343, guid: 7f6a6f151b232fc4ea93b36290eebb8f, type: 3}
       propertyPath: targetPanel
       value: 

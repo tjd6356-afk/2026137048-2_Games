@@ -35,11 +35,41 @@ public class WorkingSelectPanelUI : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    // 패널의 모든 작업 버튼(OnClick)에 이 메서드를 연결하세요.
-    // 어떤 버튼을 누르든 동일하게 "선택된 직원들을 working으로 이동"시킵니다.
-    public void OnAnyWorkButtonClicked()
+    public void AssignRed()
     {
-        MoveEmployeesToWorking();
+        Assign(WorkType.Red);
+    }
+
+    public void AssignWhite()
+    {
+        Assign(WorkType.White);
+    }
+
+    public void AssignBlack()
+    {
+        Assign(WorkType.Black);
+    }
+
+    public void AssignPale()
+    {
+        Assign(WorkType.Pale);
+    }
+
+    private void Assign(WorkType type)
+    {
+        if (currentWorking == null)
+            return;
+
+        Transform target = currentWorking.GetPoint(type);
+
+        foreach (Selectable employee in pendingEmployees)
+        {
+            employee.MoveToWorkplace(
+                target.position,
+                currentWorking.transform,
+                type);
+        }
+
         ClosePanel();
     }
 

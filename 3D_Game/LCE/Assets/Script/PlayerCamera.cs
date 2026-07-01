@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem; // 새로운 입력 시스템 사용
 
-public class PlayerCameraSmoothed : MonoBehaviour
+public class PlayerCamera : MonoBehaviour
 {
     [Header("이동 및 회전 속도")]
     public float moveSpeed = 10f;
@@ -17,22 +17,28 @@ public class PlayerCameraSmoothed : MonoBehaviour
 
     void Start()
     {
-        // 마우스 고정 및 숨기기
-        //Cursor.lockState = CursorLockMode.Locked;
+        
     }
 
     void Update()
     {
-        // 1. 부드러운 마우스 회전 (새 Input System)
-        RotateCameraSmoothed();
 
         // 2. WASD (수평 고정) + Shift/Space (수직) 이동 (새 Input System)
         MoveCameraCorrected();
 
-        // ESC 키로 마우스 해제 (유지)
-        if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+        // 가운데(휠) 버튼을 누르고 있을 때만 카메라 회전
+        if (Mouse.current != null && Mouse.current.middleButton.isPressed)
         {
-            Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked;
+            RotateCameraSmoothed();
+        }
+        else
+        {
+            // 버튼을 떼면 남아있는 마우스 델타를 천천히 제거
+            smoothedMouseDelta = Vector2.Lerp(
+                smoothedMouseDelta,
+                Vector2.zero,
+                rotationSmoothness * Time.deltaTime
+            );
         }
     }
 
