@@ -1,10 +1,10 @@
 using UnityEngine;
-using UnityEngine.AI;
+//using UnityEngine.AI; // 실패 한 시스템 ㅠㅠ
 
 // 선택 가능한 모든 오브젝트(직원 등)에 부착하는 컴포넌트입니다.
 // SelectionManager는 이 컴포넌트가 붙어있는 오브젝트만 선택 대상으로 인식합니다.
 // NavMeshAgent를 통한 이동 명령도 이 컴포넌트에서 처리합니다.
-[RequireComponent(typeof(NavMeshAgent))]
+//[RequireComponent(typeof(NavMeshAgent))] // ㅠㅠㅠㅠㅠㅠㅠㅠ 실패한 시스템 ㅠㅠ
 public class Selectable : MonoBehaviour
 {
     [Header("선택 표시 오브젝트")]
@@ -16,11 +16,12 @@ public class Selectable : MonoBehaviour
     // 현재 작업 중인 working 오브젝트 (작업 배치 시 사용, 없으면 null)
     public Transform CurrentWorkplace { get; private set; }
 
-    private NavMeshAgent agent;
+    //private NavMeshAgent agent;
 
     void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
+        //agent = GetComponent<NavMeshAgent>();
+        // 나중에 Transform 이동 코드가 들어갈 예정
 
         // 인스펙터에서 지정하지 않았다면 이름으로 자동 탐색 (선택 사항)
         if (selectionIndicator == null)
@@ -53,10 +54,11 @@ public class Selectable : MonoBehaviour
     {
         CurrentWorkplace = null;
 
-        if (agent != null && agent.isOnNavMesh)
-        {
-            agent.SetDestination(destination);
-        }
+        // 나중에 Transform 이동 코드가 들어갈 예정
+        // if (agent != null && agent.isOnNavMesh)
+        // {
+        //     agent.SetDestination(destination);
+        // }
     }
 
     // working 오브젝트 등 특정 작업 위치로 이동시킬 때 사용합니다.
@@ -65,10 +67,11 @@ public class Selectable : MonoBehaviour
     {
         CurrentWorkplace = workplace;
 
-        if (agent != null && agent.isOnNavMesh)
-        {
-            agent.SetDestination(destination);
-        }
+        // 나중에 Transform 이동 코드가 들어갈 예정
+        //if (agent != null && agent.isOnNavMesh)
+        //{
+        //    agent.SetDestination(destination);
+        //}
     }
 
     public WorkType CurrentWorkType { get; private set; }
@@ -81,9 +84,10 @@ public class Selectable : MonoBehaviour
         CurrentWorkplace = workplace;
         CurrentWorkType = workType;
 
-        if (agent != null && agent.isOnNavMesh)
-        {
-            agent.SetDestination(destination);
-        }
+        // 나중에 Transform 이동 코드가 들어갈 예정
+        //if (agent != null && agent.isOnNavMesh)
+        //{
+        //    agent.SetDestination(destination);
+        //}
     }
 }
