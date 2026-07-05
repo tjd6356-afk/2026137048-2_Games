@@ -80,6 +80,9 @@ public class WaypointPathEditor : Editor
 
         Undo.DestroyObjectImmediate(last.gameObject);
 
+        // 자동 이름 정리
+        path.RenamePoints();
+
         EditorUtility.SetDirty(path);
     }
 
@@ -91,6 +94,9 @@ public class WaypointPathEditor : Editor
         {
             path.AddPoint(child);
         }
+
+        // 자동 이름 정리
+        path.RenamePoints();
 
         EditorUtility.SetDirty(path);
     }

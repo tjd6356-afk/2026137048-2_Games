@@ -111,4 +111,18 @@ public class WaypointPath : MonoBehaviour
 
         points.Insert(to, temp);
     }
+
+    public void RenamePoints()
+    {
+        for (int i = 0; i < points.Count; i++)
+        {
+            if (points[i] == null)
+                continue;
+
+            points[i].name = $"Point{i}";
+
+            // Hierarchy 순서도 리스트와 동일하게 맞춤
+            points[i].SetSiblingIndex(i);
+        }
+    }
 }
