@@ -60,12 +60,12 @@ public class WorkingSelectPanelUI : MonoBehaviour
         if (currentWorking == null)
             return;
 
-        Transform target = currentWorking.GetPoint(type);
+        WaypointPath path = currentWorking.GetPath(type);
 
         foreach (Selectable employee in pendingEmployees)
         {
             employee.MoveToWorkplace(
-                target.position,
+                path,
                 currentWorking.transform,
                 type);
         }

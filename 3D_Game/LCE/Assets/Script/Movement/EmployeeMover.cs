@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class EmployeeMover : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class EmployeeMover : MonoBehaviour
 
     private WaypointPath currentPath;
     private int currentPointIndex;
+
+    public Action OnPathFinished;
 
     public bool IsMoving { get; private set; }
 
@@ -105,6 +108,8 @@ public class EmployeeMover : MonoBehaviour
     public void Stop()
     {
         IsMoving = false;
+
+        OnPathFinished?.Invoke();
     }
 
     private void OnDrawGizmosSelected()

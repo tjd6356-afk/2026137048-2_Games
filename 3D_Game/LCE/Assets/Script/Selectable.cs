@@ -16,12 +16,18 @@ public class Selectable : MonoBehaviour
     // 현재 작업 중인 working 오브젝트 (작업 배치 시 사용, 없으면 null)
     public Transform CurrentWorkplace { get; private set; }
 
+    private Vector3 startPosition;
+    private Quaternion startRotation;
+
     //private NavMeshAgent agent;
 
     void Awake()
     {
         //agent = GetComponent<NavMeshAgent>();
         // 나중에 Transform 이동 코드가 들어갈 예정
+
+        startPosition = transform.position;
+        startRotation = transform.rotation;
 
         // 인스펙터에서 지정하지 않았다면 이름으로 자동 탐색 (선택 사항)
         if (selectionIndicator == null)
@@ -89,5 +95,27 @@ public class Selectable : MonoBehaviour
         //{
         //    agent.SetDestination(destination);
         //}
+    }
+
+    public void MoveToWorkplace(
+    WaypointPath path,
+    Transform workplace,
+    WorkType workType)
+    {
+        CurrentWorkplace = workplace;
+        CurrentWorkType = workType;
+
+        EmployeeMover mover = GetComponent<EmployeeMover>();
+
+        if (mover != null)
+        {
+            mover.MoveAlongPath(path);
+        }
+    }
+
+    public void ReturnToStart()
+    {
+        transform.position = startPosition;
+        transform.rotation = startRotation;
     }
 }

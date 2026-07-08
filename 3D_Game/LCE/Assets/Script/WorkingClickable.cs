@@ -14,30 +14,11 @@ public class WorkingClickable : MonoBehaviour
     [Tooltip("선택된 직원의 이동 명령을 위해 필요한 SelectionManager입니다. 비워두면 씬에서 자동으로 찾습니다.")]
     public SelectionManager selectionManager;
 
-    public Transform redPoint;
-    public Transform whitePoint;
-    public Transform blackPoint;
-    public Transform palePoint;
+    [Header("공용 이동 경로")]
+    public WaypointPath workPath;
+    public WaypointPath returnPath;
 
-    public Transform GetPoint(WorkType type)
-    {
-        switch (type)
-        {
-            case WorkType.Red:
-                return redPoint;
-
-            case WorkType.White:
-                return whitePoint;
-
-            case WorkType.Black:
-                return blackPoint;
-
-            case WorkType.Pale:
-                return palePoint;
-        }
-
-        return transform;
-    }
+    public float workTime = 5f;
 
     private Camera mainCamera;
 
@@ -79,6 +60,11 @@ public class WorkingClickable : MonoBehaviour
         }
     }
 
+    public WaypointPath GetReturnPath(WorkType type)
+    {
+        return returnPath;
+    }
+
     void TryOpenPanel()
     {
         if (selectionManager == null || targetPanel == null) return;
@@ -89,5 +75,9 @@ public class WorkingClickable : MonoBehaviour
         if (selected == null || selected.Count == 0) return;
 
         targetPanel.Open(this, selected);
+    }
+    public WaypointPath GetPath(WorkType type)
+    {
+        return workPath;
     }
 }
