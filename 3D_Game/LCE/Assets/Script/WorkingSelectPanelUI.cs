@@ -60,15 +60,7 @@ public class WorkingSelectPanelUI : MonoBehaviour
         if (currentWorking == null)
             return;
 
-        WaypointPath path = currentWorking.GetPath(type);
-
-        foreach (Selectable employee in pendingEmployees)
-        {
-            employee.MoveToWorkplace(
-                path,
-                currentWorking.transform,
-                type);
-        }
+        
 
         ClosePanel();
     }
@@ -81,34 +73,34 @@ public class WorkingSelectPanelUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void MoveEmployeesToWorking()
-    {
-        if (currentWorking == null || pendingEmployees.Count == 0) return;
+    //void MoveEmployeesToWorking() 망한거.
+    //{
+    //    if (currentWorking == null || pendingEmployees.Count == 0) return;
 
-        Transform destinationTransform = workDestinationOverride != null
-            ? workDestinationOverride
-            : currentWorking.transform;
+    //    Transform destinationTransform = workDestinationOverride != null
+    //        ? workDestinationOverride
+    //        : currentWorking.transform;
 
-        Vector3 basePoint = destinationTransform.position;
-        int total = pendingEmployees.Count;
-        int index = 0;
+    //    Vector3 basePoint = destinationTransform.position;
+    //    int total = pendingEmployees.Count;
+    //    int index = 0;
 
-        foreach (Selectable employee in pendingEmployees)
-        {
-            if (employee == null) continue;
+    //    foreach (Selectable employee in pendingEmployees)
+    //    {
+    //        if (employee == null) continue;
 
-            Vector3 destination = basePoint;
+    //        Vector3 destination = basePoint;
 
-            // 여러 명이 함께 작업 장소로 갈 때 겹치지 않도록 원형으로 살짝 흩어줍니다.
-            if (total > 1 && scatterRadius > 0f)
-            {
-                float angle = (360f / total) * index * Mathf.Deg2Rad;
-                Vector3 offset = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * scatterRadius;
-                destination = basePoint + offset;
-            }
+    //        // 여러 명이 함께 작업 장소로 갈 때 겹치지 않도록 원형으로 살짝 흩어줍니다.
+    //        if (total > 1 && scatterRadius > 0f)
+    //        {
+    //            float angle = (360f / total) * index * Mathf.Deg2Rad;
+    //            Vector3 offset = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * scatterRadius;
+    //            destination = basePoint + offset;
+    //        }
 
-            employee.MoveToWorkplace(destination, currentWorking.transform);
-            index++;
-        }
-    }
+    //        employee.MoveToWorkplace(destination, currentWorking.transform);
+    //        index++;
+    //    }
+    //}
 }

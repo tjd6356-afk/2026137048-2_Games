@@ -19,6 +19,8 @@ public class Selectable : MonoBehaviour
     private Vector3 startPosition;
     private Quaternion startRotation;
 
+    private EmployeeMover mover;
+
     //private NavMeshAgent agent;
 
     void Awake()
@@ -26,20 +28,19 @@ public class Selectable : MonoBehaviour
         //agent = GetComponent<NavMeshAgent>();
         // 나중에 Transform 이동 코드가 들어갈 예정
 
+        mover = GetComponent<EmployeeMover>();
+
         startPosition = transform.position;
         startRotation = transform.rotation;
 
-        // 인스펙터에서 지정하지 않았다면 이름으로 자동 탐색 (선택 사항)
         if (selectionIndicator == null)
         {
             Transform found = transform.Find("SelectionIndicator");
+
             if (found != null)
-            {
                 selectionIndicator = found.gameObject;
-            }
         }
 
-        // 시작할 때는 선택 표시 꺼두기
         SetSelected(false);
     }
 
@@ -69,49 +70,21 @@ public class Selectable : MonoBehaviour
 
     // working 오브젝트 등 특정 작업 위치로 이동시킬 때 사용합니다.
     // workplace를 기록해두면, 도착 후 다른 스크립트(예: 작업 처리 로직)에서 참조할 수 있습니다.
-    public void MoveToWorkplace(Vector3 destination, Transform workplace)
+
+    public void StartWorking(
+    WorkingClickable working,
+    WorkType type)
     {
-        CurrentWorkplace = workplace;
-
-        // 나중에 Transform 이동 코드가 들어갈 예정
-        //if (agent != null && agent.isOnNavMesh)
-        //{
-        //    agent.SetDestination(destination);
-        //}
-    }
-
-    public WorkType CurrentWorkType { get; private set; }
-
-    public void MoveToWorkplace(
-        Vector3 destination,
-        Transform workplace,
-        WorkType workType)
-    {
-        CurrentWorkplace = workplace;
-        CurrentWorkType = workType;
-
-        // 나중에 Transform 이동 코드가 들어갈 예정
-        //if (agent != null && agent.isOnNavMesh)
-        //{
-        //    agent.SetDestination(destination);
-        //}
-    }
-
-    public void MoveToWorkplace(
-    WaypointPath path,
-    Transform workplace,
-    WorkType workType)
-    {
-        CurrentWorkplace = workplace;
-        CurrentWorkType = workType;
-
-        EmployeeMover mover = GetComponent<EmployeeMover>();
+        CurrentWorkplace = working.transform;
+        CurrentWorkType = type;
 
         if (mover != null)
         {
-            mover.MoveAlongPath(path);
+            mover.StartWork(working, type);
         }
     }
+
+    public WorkType CurrentWorkType { get; private set; }
 
     public void ReturnToStart()
     {

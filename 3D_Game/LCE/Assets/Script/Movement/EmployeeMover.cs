@@ -20,13 +20,62 @@ public class EmployeeMover : MonoBehaviour
 
     public bool IsMoving { get; private set; }
 
+    public EmployeeState State { get; private set; } = EmployeeState.Idle;
+
+    private WaypointPath workPath;
+    private WaypointPath returnPath;
+
+    private float workTimer;
+
+    private WorkingClickable currentWorking;
+
+    private WorkType currentWorkType;
+
     void Update()
     {
-        if (!IsMoving)
-            return;
+        switch (State)
+        {
+            case EmployeeState.Idle:
+                break;
 
-        Move();
-        Rotate();
+            case EmployeeState.WalkingToWork:
+
+                Move();
+                Rotate();
+
+                break;
+
+            case EmployeeState.Working:
+
+                workTimer -= Time.deltaTime;
+
+                if (workTimer <= 0f)
+                {
+                    State = EmployeeState.WalkingHome;
+
+                    MoveAlongPath(returnPath);
+                }
+
+                break;
+
+            case EmployeeState.WalkingHome:
+
+                Move();
+                Rotate();
+
+                break;
+        }
+    }
+
+    public enum EmployeeState
+    {
+        Idle,
+
+        WalkingToWork,
+
+        Working,
+
+        WalkingHome
     }
 
     public void MoveAlongPath(WaypointPath path)
@@ -41,6 +90,24 @@ public class EmployeeMover : MonoBehaviour
         currentPointIndex = 0;
 
         IsMoving = true;
+    }
+
+    public void StartWork(
+     WorkingClickable working,
+     WorkType type)
+    {
+        currentWorking = working;
+
+        currentWorkType = type;
+
+        workPath = working.workPath;
+        returnPath = working.returnPath;
+
+        workTimer = working.workTime;
+
+        State = EmployeeState.WalkingToWork;
+
+        MoveAlongPath(workPath);
     }
 
     private void Move()
@@ -108,6 +175,23 @@ public class EmployeeMover : MonoBehaviour
     public void Stop()
     {
         IsMoving = false;
+
+        switch (State)
+        {
+            case EmployeeState.WalkingToWork:
+
+                State = EmployeeState.Working;
+
+                break;
+
+            case EmployeeState.WalkingHome:
+
+                State = EmployeeState.Idle;
+
+                currentWorking = null;
+
+                break;
+        }
 
         OnPathFinished?.Invoke();
     }
